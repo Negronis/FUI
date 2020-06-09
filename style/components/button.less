@@ -1,0 +1,53 @@
+.btn{ 
+	padding:8px 15px; 
+	display:inline-block;
+	text-decoration: none;
+	color:#000;
+	border:0;
+	font-size:14px;
+	font-size:14px; 
+	text-align: center;
+	cursor: pointer;
+	&:focus{
+		outline:none;
+	}
+}
+.colorF{
+	color:#fff;
+}
+.btn-default{
+	background-color:@normal-color;
+}
+.btn-primary{
+	background-color:@primary-color; 
+	.colorF();
+}
+.btn-warning{
+	background-color:@warning-color; 
+	.colorF();
+}
+.btn-success{
+	background-color:@success-color; 
+	.colorF();
+}
+.btn-error{
+	background-color:@error-color;
+	.colorF();
+}
+@btn-prefix-cls : ~"@{css-prefix}-btn";
+.@{btn-prefix-cls}{
+	.btn;
+	.btn-default;
+	&-primary{
+		.btn-primary; 
+	}
+	&-warning{
+		.btn-warning;
+	}
+	&-success{
+		.btn-success;
+	}
+	&-error{
+		.btn-error
+	}
+}

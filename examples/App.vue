@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-      <FButton to='/func'>你好</FButton>
+      <FButtonEx></FButtonEx>
   </div>
 </template>
 
 <script> 
-
+import FButtonEx from './components/FButton/index.vue';
 export default { 
+	components:{
+		FButtonEx
+	}
 }
 </script>
 
-<style>
- 
+<style lang='less'>
+ @import '../style/index.less';
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <component :is="tagName" :class="classBtn">
+  <component :is="tagName" :class="classBtn" v-bind='tagProp'>
     <span v-if="showSlot">
       <slot></slot>
     </span>
@@ -7,14 +7,23 @@
 </template>
 
 <script>
-import mixinsLink  from '../Mixin/link.js';
-console.log(mixinsLink)
+import {oneOf} from '../../Util/assist.js'; 
+import mixinsLink  from '../Mixin/link.js'; 
+const prefixCls = 'fui-btn'
 export default {
   name: "FButton",
   mixins:[mixinsLink],
   data() {
     return {};
   }, 
+  props:{
+	type:{ 
+		validator(value){
+			return oneOf(value,['primary','warning','default','success','error'])
+		},
+		default:'default'
+	}	
+  },
   computed: {
     showSlot() {
         return !!this.$slots.default
@@ -30,8 +39,21 @@ export default {
       return isHref ? "a" : "button";
     },
     classBtn(){
-      return "";
-    }
+      return [
+		  `${prefixCls}`,
+		  `${prefixCls}-${this.type}`,
+	  ]
+    },
+	tagProp(){
+		const {isHref} = this;
+		if(isHref){
+			const {linkUrl,target} = this;
+			return {href:linkUrl ,target}
+		}else{
+			const {type} = this;
+			return {type:type};
+		}
+	} 
   }
 };
 </script>
