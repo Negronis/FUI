@@ -1,5 +1,5 @@
 <template>
-  <component :is="tagName" :class="classBtn" v-bind='tagProp'>
+  <component  :is="tagName" :class="classBtn" v-bind='tagProp' @click='handlerClick'>
     <span v-if="showSlot">
       <slot></slot>
     </span>
@@ -22,7 +22,20 @@ export default {
 			return oneOf(value,['primary','warning','default','success','error'])
 		},
 		default:'default'
-	}	
+	},
+	size:{
+		validator(value){ 
+			return oneOf(value,['normal','large','small','percent'])
+		},
+		default:'normal'
+	},
+	shape:{
+		validator(value){
+			return oneOf(value,['square','circle'])
+		},
+		default:"square"
+	},
+	disabled:Boolean
   },
   computed: {
     showSlot() {
@@ -42,6 +55,11 @@ export default {
       return [
 		  `${prefixCls}`,
 		  `${prefixCls}-${this.type}`,
+		 {
+			[`${prefixCls}-${this.size}`] : !! this.size,
+			[`${prefixCls}-${this.shape}`] : !! this.shape,
+			[`${prefixCls}-disabled`] : !! this.disabled,
+		}
 	  ]
     },
 	tagProp(){
@@ -50,10 +68,15 @@ export default {
 			const {linkUrl,target} = this;
 			return {href:linkUrl ,target}
 		}else{
-			const {type} = this;
-			return {type:type};
+			const {type,disabled} = this;
+			return {type:type,disabled:disabled};
 		}
-	} 
+	}
+  },
+  methods:{
+	  handlerClick(event){
+		this.$emit('click',event); 
+	  }
   }
 };
 </script>

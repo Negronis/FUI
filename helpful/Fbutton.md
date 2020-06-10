@@ -259,29 +259,26 @@ props:{
 	cursor: pointer;
 	&:focus{
 		outline:none;
-	}
+	} 
 }
-.colorF{
+.bg_cl(@color:#fff){
 	color:#fff;
+	background-color: @color;
 }
 .btn-default{
 	background-color:@normal-color;
 }
 .btn-primary{
-	background-color:@primary-color; 
-	.colorF();
+	.bg_cl(@primary-color);
 }
 .btn-warning{
-	background-color:@warning-color; 
-	.colorF();
+	.bg_cl(@warning-color);
 }
 .btn-success{
-	background-color:@success-color; 
-	.colorF();
+	.bg_cl(@success-color); 
 }
 .btn-error{
-	background-color:@error-color;
-	.colorF();
+	.bg_cl(@error-color);
 }
 @btn-prefix-cls : ~"@{css-prefix}-btn";
 .@{btn-prefix-cls}{
@@ -300,4 +297,142 @@ props:{
 		.btn-error
 	}
 }
+```
+
+##### 下一步：为按钮绑定方法
+首先为标签加上事件绑定：
+```html
+  <component :is="tagName" :class="classBtn" v-bind='tagProp' @click='handlerClick'>
+    <span v-if="showSlot">
+      <slot></slot>
+    </span>
+  </component>
+```
+然后编写handlerClick：
+```javascript
+  methods:{
+	  handlerClick(event){
+		this.$emit('click',event); 
+	  }
+  }
+``` 
+##### 下一步：为按钮添加大小 
+编写继承size：
+```javascript
+  props:{
+	type:{ 
+		validator(value){
+			return oneOf(value,['primary','warning','default','success','error'])
+		},
+		default:'default'
+	},
+	size:{
+		validator(value){ 
+			return oneOf(value,['normal','large','small','percent'])
+		},
+		default:'normal'
+	}
+  },
+```
+在样式文件中添加大小：
+```css
+.btn-size(@padding;@font-size;@border-radius){ 
+	padding:@padding;
+	font-size: @font-size;
+	border-radius: @border-radius;
+}
+&-normal{
+	.btn-size(8px 15px,14px,0px);
+}
+&-small{
+	.btn-size(4px 7px,12px,0px);
+}
+&-large{
+	.btn-size(10px 20px,20px,0px);
+}
+&-percent{
+	width:100%;
+	.btn-size(8px 15px,14px,0px);
+}
+```
+
+##### 为按钮添加形状
+定义参数为shape，
+编写Props：
+```javascript
+	shape:{
+		validator(value){
+			return oneOf(value,['square','circle'])
+		},
+		default:"square"
+	}
+```
+然后编写样式：
+```css
+@btn-prefix-cls : ~"@{css-prefix}-btn";
+.@{btn-prefix-cls}{
+	.btn;
+	.btn-default;
+	&-primary{
+		.btn-primary; 
+	}
+	&-warning{
+		.btn-warning;
+	}
+	&-success{
+		.btn-success;
+	}
+	&-error{
+		.btn-error
+	}
+	&-normal{
+		.btn-size(8px 15px,14px,0px);
+	}
+	&-normal&-circle{
+		.btn-size(8px 15px,14px,15px);
+	}
+	&-small{
+		.btn-size(4px 7px,12px,0px);
+	}
+	&-small&-circle{
+		.btn-size(4px 7px,12px,15px);
+	}
+	&-large{
+		.btn-size(10px 20px,20px,0px);
+	}
+	&-large&-circle{
+		.btn-size(10px 20px,20px,15px);
+	}
+	&-percent{
+		width:100%;
+		.btn-size(8px 15px,14px,0px);
+	}
+	&-percent&-circle{
+		width:100%;
+		.btn-size(8px 15px,14px,15px);
+	}
+}
+```
+
+##### 下一步 增加disabled状态和颜色
+在props中添加disabled属性，type为Boolean，
+然后修改tagProp：
+```javascript
+	tagProp(){
+		const {isHref} = this;
+		if(isHref){
+			const {linkUrl,target} = this;
+			return {href:linkUrl ,target}
+		}else{
+			const {type,disabled} = this;
+			return {type:type,disabled:disabled};
+		}
+	}
+```
+然后添加禁用的样式：
+```css
+	&-disabled{
+		color:#eee;
+		background-color: @btn-disable-color;
+	}
 ```

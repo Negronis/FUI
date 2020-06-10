@@ -1,38 +1,38 @@
-.btn{ 
-	padding:8px 15px; 
+.btn{  
 	display:inline-block;
 	text-decoration: none;
 	color:#000;
-	border:0;
-	font-size:14px;
-	font-size:14px; 
+	border:0; 
 	text-align: center;
 	cursor: pointer;
+	.btn-size(8px 15px,14px,0px);
 	&:focus{
 		outline:none;
-	}
+	} 
 }
-.colorF{
+.btn-size(@padding;@font-size;@border-radius){ 
+	padding:@padding;
+	font-size: @font-size;
+	border-radius: @border-radius;
+}
+.bg_cl(@color:#fff){
 	color:#fff;
+	background-color: @color;
 }
 .btn-default{
 	background-color:@normal-color;
 }
 .btn-primary{
-	background-color:@primary-color; 
-	.colorF();
+	.bg_cl(@primary-color);
 }
 .btn-warning{
-	background-color:@warning-color; 
-	.colorF();
+	.bg_cl(@warning-color);
 }
 .btn-success{
-	background-color:@success-color; 
-	.colorF();
+	.bg_cl(@success-color); 
 }
 .btn-error{
-	background-color:@error-color;
-	.colorF();
+	.bg_cl(@error-color);
 }
 @btn-prefix-cls : ~"@{css-prefix}-btn";
 .@{btn-prefix-cls}{
@@ -49,5 +49,35 @@
 	}
 	&-error{
 		.btn-error
+	}
+	&-normal{
+		.btn-size(8px 15px,14px,0px);
+	}
+	&-normal&-circle{
+		.btn-size(8px 15px,14px,15px);
+	}
+	&-small{
+		.btn-size(4px 7px,12px,0px);
+	}
+	&-small&-circle{
+		.btn-size(4px 7px,12px,15px);
+	}
+	&-large{
+		.btn-size(10px 20px,20px,0px);
+	}
+	&-large&-circle{
+		.btn-size(10px 20px,20px,15px);
+	}
+	&-percent{
+		width:100%;
+		.btn-size(8px 15px,14px,0px);
+	}
+	&-percent&-circle{
+		width:100%;
+		.btn-size(8px 15px,14px,15px);
+	}
+	&-disabled{
+		color:#eee;
+		background-color: @btn-disable-color;
 	}
 }
