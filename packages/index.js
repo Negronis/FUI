@@ -1,6 +1,7 @@
 import FButton from './FButton';
+import FCard from './FCard';
 const components = [
-    FButton
+    FButton,FCard
 ]
 const install = function (Vue) {
     if (install.installted) return;
@@ -11,5 +12,6 @@ if (typeof window !== undefined && window.Vue) {
 }
 export default {
     install,
-    FButton
+    FButton,
+	FCard
 }

@@ -1,14 +1,16 @@
 <template>
   <div id="app">
-      <FButtonEx></FButtonEx>
+		<FButtonEx></FButtonEx>
+		<FCardEx></FCardEx>
   </div>
 </template>
 
 <script> 
 import FButtonEx from './components/FButton/index.vue';
+import FCardEx from './components/FCard/index.vue';
 export default { 
 	components:{
-		FButtonEx
+		FButtonEx,FCardEx
 	}
 }
 </script>

@@ -7,20 +7,24 @@
 	cursor: pointer;
 	.btn-size(8px 15px,14px,0px);
 	&:focus{
-		outline:none;
-	} 
+		outline:none; 
+	}  
 }
 .btn-size(@padding;@font-size;@border-radius){ 
 	padding:@padding;
 	font-size: @font-size;
 	border-radius: @border-radius;
 }
-.bg_cl(@color:#fff){
-	color:#fff;
+.bg_cl(@color:#fff;@fcolor:#fff;@border:none){
+	color:@fcolor;
 	background-color: @color;
+	border:@border;
 }
 .btn-default{
-	background-color:@normal-color;
+	.bg_cl(#fff,@text-color,1px solid @border-color-base);
+	// &:hover{
+	// 	.bg_cl(#fff,@primary-color,1px solid @primary-color);
+	// }
 }
 .btn-primary{
 	.bg_cl(@primary-color);
@@ -37,7 +41,7 @@
 @btn-prefix-cls : ~"@{css-prefix}-btn";
 .@{btn-prefix-cls}{
 	.btn;
-	.btn-default;
+	.btn-default; 
 	&-primary{
 		.btn-primary; 
 	}
@@ -51,26 +55,26 @@
 		.btn-error
 	}
 	&-normal{
-		.btn-size(8px 15px,14px,0px);
+		.btn-size(8px 15px,14px,5px);
 	}
 	&-normal&-circle{
 		.btn-size(8px 15px,14px,15px);
 	}
 	&-small{
-		.btn-size(4px 7px,12px,0px);
+		.btn-size(4px 7px,12px,5px);
 	}
 	&-small&-circle{
 		.btn-size(4px 7px,12px,15px);
 	}
 	&-large{
-		.btn-size(10px 20px,20px,0px);
+		.btn-size(10px 20px,20px,5px);
 	}
 	&-large&-circle{
 		.btn-size(10px 20px,20px,15px);
 	}
 	&-percent{
 		width:100%;
-		.btn-size(8px 15px,14px,0px);
+		.btn-size(8px 15px,14px,5px);
 	}
 	&-percent&-circle{
 		width:100%;

@@ -1,0 +1,23 @@
+.card{
+	width:320px;
+	padding:5px;
+	border-radius: 5px;
+	box-shadow:.1px .1px 5px 1px grey;
+	min-height:200px; 
+} 
+@card-prefix-cls:~"@{css-prefix}-card";
+.@{card-prefix-cls}{
+	.card; 
+	&-head{
+		border-bottom:1px solid @normal-color;
+		padding:0 10px;
+		font-size:16px;
+		font-weight:bold;
+	}
+	&-body{
+		margin:10px;
+	}
+	&:hover{
+		box-shadow:.1px .1px 5px 2px grey;
+	}
+}

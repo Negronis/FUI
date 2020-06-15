@@ -4,12 +4,12 @@
 		<div>
 			<FButton to='/func'>你好</FButton>
 			<FButton shape='circle'>你好</FButton>
+			<FButton type='error' shape='circle'>你好</FButton>
 			<FButton type='primary' @click="test">你好</FButton>
 			<FButton type='warning' size='large' shape='circle'>你好</FButton>
 			<FButton type='success' size='small' shape='circle'>你好</FButton>
 			<FButton @click='test' :disabled="true" type='error' size='percent' shape='circle'>你好</FButton> 
-		</div>
-			
+		</div> 
 	</div>
 </template>
 
@@ -22,6 +22,5 @@
 		}
 	}
 </script>
-
 <style>
 </style>
